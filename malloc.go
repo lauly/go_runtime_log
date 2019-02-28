@@ -521,6 +521,7 @@ var zerobase uintptr
 // Otherwise it returns 0.
 func nextFreeFast(s *mspan) gclinkptr {
 	theBit := sys.Ctz64(s.allocCache) // Is there a free object in the allocCache?
+	println("nextFreeFast theBit: ", theBit)
 	if theBit < 64 {
 		result := s.freeindex + uintptr(theBit)
 		if result < s.nelems {
