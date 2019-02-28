@@ -710,6 +710,7 @@ func mallocgc(size uintptr, typ *_type, needzero bool) unsafe.Pointer {
 			println("mallocgc nextFreeFast ret: ", v)
 			if v == 0 {
 				v, span, shouldhelpgc = c.nextFree(spc)
+				println("mallocgc nextFree ret: ", v, span)
 			}
 			x = unsafe.Pointer(v)
 			if needzero && span.needzero != 0 {
