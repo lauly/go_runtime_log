@@ -521,7 +521,7 @@ var zerobase uintptr
 // Otherwise it returns 0.
 func nextFreeFast(s *mspan) gclinkptr {
 	theBit := sys.Ctz64(s.allocCache) // Is there a free object in the allocCache?
-	println("nextFreeFast theBit: ", theBit)
+	//println("nextFreeFast theBit: ", theBit)
 	if theBit < 64 {
 		result := s.freeindex + uintptr(theBit)
 		if result < s.nelems {
@@ -708,10 +708,10 @@ func mallocgc(size uintptr, typ *_type, needzero bool) unsafe.Pointer {
 			spc := makeSpanClass(sizeclass, noscan)
 			span := c.alloc[spc]
 			v := nextFreeFast(span)
-			println("mallocgc nextFreeFast ret: ", v)
+			//println("mallocgc nextFreeFast ret: ", v)
 			if v == 0 {
 				v, span, shouldhelpgc = c.nextFree(spc)
-				println("mallocgc nextFree ret: ", v, span)
+				//println("mallocgc nextFree ret: ", v, span)
 			}
 			x = unsafe.Pointer(v)
 			if needzero && span.needzero != 0 {
