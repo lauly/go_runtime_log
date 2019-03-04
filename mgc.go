@@ -1288,6 +1288,7 @@ func gcStart(mode gcMode, trigger gcTrigger) {
 	}
 
 	// Ok, we're doing it! Stop everybody else
+	println("gcStart worldsema: ", worldsema)
 	semacquire(&worldsema)
 
 	if trace.enabled {
@@ -1295,6 +1296,7 @@ func gcStart(mode gcMode, trigger gcTrigger) {
 	}
 
 	if mode == gcBackgroundMode {
+		println("gcBgMarkStartWorkers...",)
 		gcBgMarkStartWorkers()
 	}
 
