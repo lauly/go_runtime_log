@@ -215,7 +215,7 @@ var physPageSize uintptr
 // if accessed. Used only for debugging the runtime.
 
 func mallocinit() {
-	println("mallocinit...")
+	//println("mallocinit...")
 	if class_to_size[_TinySizeClass] != _TinySize {
 		throw("bad TinySizeClass")
 	}
