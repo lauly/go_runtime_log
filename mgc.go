@@ -1288,8 +1288,9 @@ func gcStart(mode gcMode, trigger gcTrigger) {
 	}
 
 	// Ok, we're doing it! Stop everybody else
-	println("gcStart worldsema: ", worldsema)
+	println("gcStart worldsema before: ", worldsema)
 	semacquire(&worldsema)
+	println("gcStart worldsema: ", worldsema)
 
 	if trace.enabled {
 		traceGCStart()
@@ -1720,6 +1721,7 @@ func gcMarkTermination(nextTriggerRatio float64) {
 func gcBgMarkStartWorkers() {
 	// Background marking is performed by per-P G's. Ensure that
 	// each P has a background GC G.
+	println("gcBgMarkStartWorkers allp: ", len(allp))
 	for _, p := range allp {
 		if p.gcBgMarkWorker == 0 {
 			go gcBgMarkWorker(p)
