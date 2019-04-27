@@ -75,7 +75,6 @@ func deferproc(siz int32, fn *funcval) { // arguments of fn follow fn
 		// go code on the system stack can't defer
 		throw("defer on system stack")
 	}
-	println("deferproc ", siz, fn)
 	// the arguments of fn are in a perilous state. The stack map
 	// for deferproc does not describe them. So we can't let garbage
 	// collection or stack copying trigger until we've copied them out
@@ -194,7 +193,6 @@ func newdefer(siz int32) *_defer {
 	var d *_defer
 	sc := deferclass(uintptr(siz))
 	gp := getg()
-	println("newdefer sc ", sc, ", len(p): ", len(p{}.deferpool), sc < uintptr(len(p{}.deferpool)))
 	if sc < uintptr(len(p{}.deferpool)) {
 		pp := gp.m.p.ptr()
 		if len(pp.deferpool[sc]) == 0 && sched.deferpool[sc] != nil {
